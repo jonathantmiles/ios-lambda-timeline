@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class ImagePostViewController: ShiftableViewController {
+class ImagePostViewController: ShiftableViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +17,8 @@ class ImagePostViewController: ShiftableViewController {
         setImageViewHeight(with: 1.0)
         
         updateViews()
+        
+        filterTableView.delegate = self
     }
     
     func updateViews() {
@@ -34,6 +36,11 @@ class ImagePostViewController: ShiftableViewController {
         imageView.image = image
         
         chooseImageButton.setTitle("", for: [])
+        
+        // MARK: - table view delegate methods
+        
+        var cell1 = filterTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SwitchTableViewCell
+        cell1?.isHidden
     }
     
     private func presentImagePickerController() {
@@ -112,10 +119,17 @@ class ImagePostViewController: ShiftableViewController {
         view.layoutSubviews()
     }
     
+    // MARK: - TableView Delegacy
+    
+    
+    
+    // MARK: - Properties
+    
     var postController: PostController!
     var post: Post?
     var imageData: Data?
     
+    @IBOutlet weak var filterTableView: UITableView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var chooseImageButton: UIButton!
