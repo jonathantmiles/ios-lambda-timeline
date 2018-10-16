@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
 
-class RecordingViewController: UIViewController {
+class RecordingViewController: UIViewController, AVAudioPlayerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +18,19 @@ class RecordingViewController: UIViewController {
     }
     
     @IBAction func recordComment(_ sender: Any) {
+        let isRecording = recorder?.isRecording ?? false
+        if isRecording {
+            recorder?.stop()
+            if let url = recorder?.url {
+                player = try! AVAudioPlayer(contentsOf: url)
+                player?.delegate = self
+            }
+        } else {
+            let format = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 1)!
+            recorder = try! AVAudioRecorder(url: newRecordingURL(), format: format)
+            recorder?.record()
+        }
+        updateViews()
     }
     @IBAction func playBackComment(_ sender: Any) {
     }
@@ -25,7 +39,21 @@ class RecordingViewController: UIViewController {
     @IBAction func cancel(_ sender: Any) {
     }
     
+    // MARK: - Private Functions
+    
+    private func updateViews() {
+        guard isViewLoaded else { return }
+        let isRecording = recorder?.isRecording ?? false
+        let recordButtonTitle = isRecording ? "Stop" : "Play"
+        recordButton.setTitle(recordButtonTitle, for: .normal)
+    }
 
+    private func newRecordingURL() -> URL {
+        let fm = FileManager.default
+        let docsDir = try! fm.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        return docsDir.appendingPathComponent(UUID().uuidString).appendingPathExtension("caf")
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -37,6 +65,10 @@ class RecordingViewController: UIViewController {
     */
     
     // MARK: - Properties
+    
+    var recorder: AVAudioRecorder?
+    var player: AVAudioPlayer?
+    
     @IBOutlet weak var playBackButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     
