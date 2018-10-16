@@ -230,6 +230,72 @@
             </objects>
             <point key="canvasLocation" x="1968.8" y="-195.6521739130435"/>
         </scene>
+        <!--Title-->
+        <scene sceneID="9Xi-UZ-LCt">
+            <objects>
+                <viewController storyboardIdentifier="RecordingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="woI-6B-2Ue" customClass="RecordingViewController" customModule="LambdaTimeline" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZbZ-5M-laq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="PN9-bV-zZF">
+                                <rect key="frame" x="125.5" y="318.5" width="124" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8D-gH-LBk">
+                                        <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
+                                        <state key="normal" title="Record"/>
+                                        <connections>
+                                            <action selector="recordComment:" destination="woI-6B-2Ue" eventType="touchUpInside" id="Hen-9z-6PQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kwc-zL-NzR">
+                                        <rect key="frame" x="57" y="0.0" width="67" height="30"/>
+                                        <state key="normal" title="Play Back"/>
+                                        <connections>
+                                            <action selector="playBackComment:" destination="woI-6B-2Ue" eventType="touchUpInside" id="HIG-7f-06Z"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyO-5x-JoQ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Add a Recorded Comment" id="Roy-qw-hZO">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nqN-CA-D8K">
+                                            <connections>
+                                                <segue destination="O5t-Or-K9n" kind="unwind" unwindAction="unwindFromRecordingToDetailVCWithSegue:" id="7jo-WN-GTC"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="LvF-Gu-ZoE">
+                                            <connections>
+                                                <action selector="done:" destination="woI-6B-2Ue" id="1gT-Ax-kyr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nyO-5x-JoQ" firstAttribute="trailing" secondItem="lgU-11-Cfi" secondAttribute="trailing" id="1Mi-Yf-8dW"/>
+                            <constraint firstItem="PN9-bV-zZF" firstAttribute="centerX" secondItem="ZbZ-5M-laq" secondAttribute="centerX" id="Wf7-2t-wMY"/>
+                            <constraint firstItem="PN9-bV-zZF" firstAttribute="centerY" secondItem="ZbZ-5M-laq" secondAttribute="centerY" id="wHQ-6I-Tce"/>
+                            <constraint firstItem="nyO-5x-JoQ" firstAttribute="leading" secondItem="lgU-11-Cfi" secondAttribute="leading" id="yah-yv-UEa"/>
+                            <constraint firstItem="nyO-5x-JoQ" firstAttribute="top" secondItem="lgU-11-Cfi" secondAttribute="top" id="z1n-sv-WCV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lgU-11-Cfi"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="0ic-pZ-ONH"/>
+                    <connections>
+                        <outlet property="playBackButton" destination="kwc-zL-NzR" id="UmX-s4-5aF"/>
+                        <outlet property="recordButton" destination="t8D-gH-LBk" id="Os1-Yl-f7Z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yuZ-L5-fcP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="O5t-Or-K9n" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2894" y="473"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="gdW-Je-ais">
             <objects>
@@ -361,6 +427,44 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AudioCommentCell" id="nvj-uP-N5f" customClass="AudioRecordingTableViewCell" customModule="LambdaTimeline" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="177" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nvj-uP-N5f" id="hWJ-Z4-2tJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qd1-fW-5re">
+                                            <rect key="frame" x="16" y="11" width="279" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQG-OQ-HS4">
+                                            <rect key="frame" x="321" y="7" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="V4J-FR-Y00"/>
+                                            </constraints>
+                                            <state key="normal" title="Play"/>
+                                            <connections>
+                                                <action selector="playAudioRecording:" destination="nvj-uP-N5f" eventType="touchUpInside" id="Huk-Lz-1zp"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="QQG-OQ-HS4" firstAttribute="leading" secondItem="qd1-fW-5re" secondAttribute="trailing" constant="26" id="0zM-Cr-fZh"/>
+                                        <constraint firstItem="qd1-fW-5re" firstAttribute="centerY" secondItem="QQG-OQ-HS4" secondAttribute="centerY" id="3B7-Ku-A0f"/>
+                                        <constraint firstItem="qd1-fW-5re" firstAttribute="leading" secondItem="hWJ-Z4-2tJ" secondAttribute="leadingMargin" id="Fht-XX-5jR"/>
+                                        <constraint firstItem="qd1-fW-5re" firstAttribute="bottom" secondItem="hWJ-Z4-2tJ" secondAttribute="bottomMargin" id="IU5-aO-s5B"/>
+                                        <constraint firstItem="QQG-OQ-HS4" firstAttribute="top" secondItem="hWJ-Z4-2tJ" secondAttribute="topMargin" constant="-4" id="YzN-yI-Hm0"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="QQG-OQ-HS4" secondAttribute="trailing" constant="8" id="icD-4L-T9c"/>
+                                        <constraint firstItem="qd1-fW-5re" firstAttribute="top" secondItem="hWJ-Z4-2tJ" secondAttribute="topMargin" id="vtG-7v-Zxd"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="recordingName" destination="qd1-fW-5re" id="d2T-8v-c7c"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

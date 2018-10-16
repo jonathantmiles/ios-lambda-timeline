@@ -28,11 +28,15 @@ class ImagePostDetailTableViewController: UITableViewController {
         authorLabel.text = post.author.displayName
     }
     
+    @IBAction func unwindFromRecordingToDetailVC(segue: UIStoryboardSegue) {
+        
+    }
+    
     // MARK: - Table view data source
     
     @IBAction func createComment(_ sender: Any) {
         
-        let alert = UIAlertController(title: "Add a comment", message: "Write your comment below:", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add a comment", message: "Write your comment below or choose to leave a recording:", preferredStyle: .alert)
         
         var commentTextField: UITextField?
         
@@ -52,9 +56,15 @@ class ImagePostDetailTableViewController: UITableViewController {
             }
         }
         
+        let showRecordingInterfaceAction = UIAlertAction(title: "Leave a Recording", style: .default) { (_) in
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "RecordingViewController")
+            self.present(controller!, animated: true, completion: nil)
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alert.addAction(addCommentAction)
+        alert.addAction(showRecordingInterfaceAction)
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
