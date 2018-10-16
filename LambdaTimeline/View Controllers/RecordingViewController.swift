@@ -33,6 +33,19 @@ class RecordingViewController: UIViewController, AVAudioPlayerDelegate {
         updateViews()
     }
     @IBAction func playBackComment(_ sender: Any) {
+        let isPlaying = player?.isPlaying ?? false
+        if isPlaying {
+            player?.pause()
+        } else {
+            player?.play()
+            if (player == nil) {
+                let alert = UIAlertController(title: "No Comment Recorded", message: "You haven't recorded a comment yet", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alert.addAction(cancelAction)
+                present(alert, animated: true)
+            }
+        }
+        updateViews()
     }
     @IBAction func done(_ sender: Any) {
     }
@@ -46,12 +59,20 @@ class RecordingViewController: UIViewController, AVAudioPlayerDelegate {
         let isRecording = recorder?.isRecording ?? false
         let recordButtonTitle = isRecording ? "Stop" : "Play"
         recordButton.setTitle(recordButtonTitle, for: .normal)
+        
+        let isPlaying = player?.isPlaying ?? false
+        let playerButtonTitle = isPlaying ? "Pause" : "Play Back"
+        playBackButton.setTitle(playerButtonTitle, for: .normal)
     }
 
     private func newRecordingURL() -> URL {
         let fm = FileManager.default
         let docsDir = try! fm.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         return docsDir.appendingPathComponent(UUID().uuidString).appendingPathExtension("caf")
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        updateViews()
     }
     
     /*
