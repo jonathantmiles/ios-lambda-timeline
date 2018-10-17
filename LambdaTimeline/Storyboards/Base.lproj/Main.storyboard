@@ -269,6 +269,7 @@
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="LvF-Gu-ZoE">
                                             <connections>
                                                 <action selector="done:" destination="woI-6B-2Ue" id="1gT-Ax-kyr"/>
+                                                <segue destination="O5t-Or-K9n" kind="unwind" unwindAction="unwindFromRecordingToDetailVCWithSegue:" id="wbw-Lj-8Cl"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
